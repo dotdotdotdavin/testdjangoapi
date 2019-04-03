@@ -1,0 +1,14 @@
+
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="myfile">
+    <button type="submit">Upload</button>
+  </form>
+  <img src="media/images/jeon.jpg">
+  <img src="media/images/soohee.jpg">
+
+
+
+{% endblock %}
