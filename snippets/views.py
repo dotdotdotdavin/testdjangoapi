@@ -5,7 +5,11 @@ from rest_framework import generics
 from .models import Snippet
 from .models import FaceImage
 from .serializers import SnippetSerializer
+from django.http import HttpResponse
+from django.conf import settings
+
 import json
+import os
 
 
 class SnippetList(generics.ListCreateAPIView):
@@ -20,10 +24,9 @@ class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
 
 def face1(request):
     if request.method == 'POST' or request.method == 'GET':
-        faceimg = FaceImage
-        faceimg2 = FaceImage
-        # body_unicode = request.body.decode('utf-8')
-        # body = json.loads(body_unicode)
-        # print(body['sources'][0]['image_url'])
-        
-        return render(request,'simple.html')
+        path = "media/result/resultgif.gif"
+        file_path = os.path.join(settings.MEDIA_ROOT, path)
+        with open(path,'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="image/gif")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
