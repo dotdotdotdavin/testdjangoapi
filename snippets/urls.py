@@ -7,7 +7,8 @@ from django.conf.urls import url
 urlpatterns = [
     path('snippets/', views.SnippetList.as_view()),
     # path('snippets/<int:pk>/', views.SnippetDetail.as_view()),
-    path('face1',views.face1)
+    path('face1',views.FaceImage.face1),
+    path('face2',views.FaceImage.face2)
    
 ]
 
