@@ -58,8 +58,8 @@ def faceMorph(url1,url2):
   im2 = np.float32(im2)/255.0
 
   # Dimensions of output image
-  h = 600
-  w = 600
+  h = 300
+  w = 300
 
   # Normalize image to output coordinates.
   imNorm1, points1 = fbc.normalizeImagesAndLandmarks((h, w), im1, points1)
@@ -119,6 +119,11 @@ def faceMorph(url1,url2):
     namesArr.append(b1)
     imagesArr.append(imageio.imread(b1))
 
+    if alpha == 1.000:
+      for i in range(0,3):
+        namesArr.append(b1)
+        imagesArr.append(imageio.imread(b1))
+
     if increaseAlpha:
       alpha += 0.025
     else:
@@ -131,7 +136,11 @@ def faceMorph(url1,url2):
     # if key==27:  # ESC
       # If ESC is pressed, exit.
       # break
-  kargs = {'duration':0.1}  
+
+
+  
+
+  kargs = {'duration':0.01}  
   temp_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
   temp_name = 'media/result/result-'+temp_str+'.gif'
   imageio.mimsave(temp_name, imagesArr,'GIF',**kargs)

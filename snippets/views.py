@@ -2,6 +2,9 @@ from django.shortcuts import render
 
 # snippets/views.py
 from rest_framework import generics
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .models import Snippet
 from .models import FaceImage
 from .serializers import SnippetSerializer
@@ -33,6 +36,7 @@ class FaceImage():
                 response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
                 return response
 
+    @api_view(['GET', 'POST'])
     def face2(request):
         if request.method == 'POST' or request.method == 'GET':
             body_unicode = request.body.decode('utf-8')
